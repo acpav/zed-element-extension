@@ -1,0 +1,29 @@
+name = "Xbsl"
+grammar = "xbsl"
+path_suffixes = ["xbsl"]
+line_comments = ["//"]
+block_comment = { start = "/*", prefix = "", end = "*/", tab_size = 1 }
+autoclose_before = ";)]}"
+
+brackets = [
+  { start = "{", end = "}", close = true, newline = false },
+  { start = "[", end = "]", close = true, newline = true },
+  { start = "(", end = ")", close = true, newline = true },
+  { start = "\"", end = "\"", close = true, newline = false, not_in = ["string", "comment"] },
+  { start = "'", end = "'", close = true, newline = false, not_in = ["string", "comment"] },
+]
+
+# Compound statements (если/пока/для/попытка/выбор) and declarations
+# (метод/структура/перечисление/контракт/исключение) indent their bodies and
+# are terminated by a `;` on its own line. The `;` line and the branch
+# keywords (иначе/поймать/когда) are dedented to the nearest matching
+# statement via the @start.* captures in indents.scm.
+increase_indent_pattern = "^\\s*(?:если|иначе|пока|для|попытка|поймать|выбор|когда|метод|статический|абстрактный|структура|перечисление|контракт|исключение)\\b"
+
+decrease_indent_patterns = [
+  { pattern = "^\\s*иначе\\s+если\\b", valid_after = ["if", "else"] },
+  { pattern = "^\\s*иначе\\b", valid_after = ["if", "else", "select", "case"] },
+  { pattern = "^\\s*поймать\\b", valid_after = ["try"] },
+  { pattern = "^\\s*когда\\b", valid_after = ["case"] },
+  { pattern = "^\\s*;\\s*$", valid_after = ["if", "else", "while", "for", "try", "catch", "select", "case", "method", "type"] },
+]

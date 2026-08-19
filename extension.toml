@@ -1,0 +1,17 @@
+id = "xbsl"
+name = "1C:Element (XBSL)"
+version = "0.1.0"
+schema_version = 1
+authors = ["1C:Element (XBSL) extension contributors"]
+description = "1C:Element (XBSL) language support: syntax highlighting, indentation, outline"
+repository = "https://github.com/acpav/zed-element-extension"
+languages = ["languages/xbsl"]
+
+[grammars.xbsl]
+# Local development: the grammar lives in ./tree-sitter-xbsl (a git repository).
+# When publishing, replace with the URL of your tree-sitter-xbsl repository and
+# pin `rev` to its commit SHA, e.g.:
+#   repository = "https://github.com/<you>/tree-sitter-xbsl"
+#   rev = "<commit sha>"
+repository = "https://github.com/acpav/zed-element-extension/tree-sitter-xbsl"
+rev = "c38c0c4986de16ed793a513a493f92aeb1a01e74"

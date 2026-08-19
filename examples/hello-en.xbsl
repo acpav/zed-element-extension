@@ -1,0 +1,54 @@
+import CoreApplication::EventLog
+
+// English keywords are also supported by the grammar
+const EMPTY_CALENDAR_TEXT: String = "No events"
+
+@InSubsystem
+struct Month
+    var Index: Number
+    var ShortName: String
+    var FullName: String
+;
+
+@Local
+static method GetMonths(): Array<Month>
+    return [
+        new Month(0, "Jan", "January"),
+        new Month(1, "Feb", "February")
+    ]
+;
+
+@Local
+method GetTitle(SelectedMonth: Month?, CurrentYear: Number): String
+    return SelectedMonth == Undefined
+        ? EMPTY_CALENDAR_TEXT
+        : "%{SelectedMonth.FullName}, %{CurrentYear}"
+;
+
+@OnServer
+method CountEvents(AsOfDate: Date): Number?
+    var StartOfDay = new DateTime(AsOfDate, Time{00:00:00})
+    var EndOfDay = new DateTime(AsOfDate, Time{23:59:59})
+    var Query = Query{
+    SELECT
+        COUNT(Events.Ref) AS EventCount
+    FROM
+        Events AS Events
+    WHERE
+        Events.Start BETWEEN %StartOfDay AND %EndOfDay
+    }
+
+    return Query.Execute().SingleOrUndefined()?.EventCount
+;
+
+@Handler
+method AfterCreate()
+    var Image = Resource{checkmark.svg}.Link
+    var Months = GetMonths()
+
+    if Months != Undefined and Months.Size() > 0
+        EventLog.Add("Done: $Image")
+    else
+        EventLog.Add("Nothing to show")
+    ;
+;
