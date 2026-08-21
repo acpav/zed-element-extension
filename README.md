@@ -10,7 +10,7 @@
 ## Возможности
 
 - **Подсветка синтаксиса** через грамматику
-  [tree-sitter-xbsl](./tree-sitter-xbsl) (Tree-sitter, без TextMate):
+  [tree-sitter-xbsl](https://github.com/acpav/tree-sitter-xbsl) (Tree-sitter, без TextMate):
   - операторы, объявления и модификаторы: `если/иначе`, `пока`, `для`,
     `попытка/поймать`, `выбор/когда`, `метод`, `структура`,
     `перечисление`, `контракт`, `исключение`, `знч/пер/обз/исп`, `конст`,
@@ -34,25 +34,11 @@
 ### Локальная разработка (dev extension)
 
 1. Откройте страницу расширений (`Extensions`) в Zed и нажмите
-   `Install Dev Extension`, выберите каталог `zed-element-extension-main`.
+   `Install Dev Extension`, выберите каталог `zed-element-extension`.
 2. Грамматика загружается из локального git-репозитория `tree-sitter-xbsl`
    (см. `repository` в `extension.toml`). При первом открытии файла `.xbsl`
    Zed сам скомпилирует парсер (потребуется `wasi-sdk`, Zed скачает его
    автоматически).
-
-### Публикация
-
-1. Загрузите `tree-sitter-xbsl` на GitHub.
-2. В `extension.toml` замените `repository` на URL вашего репозитория и
-   укажите в `rev` актуальный SHA коммита.
-3. Опубликуйте расширение в каталог Zed Extensions
-   (см. [документацию Zed](https://zed.dev/docs/extensions/developing-extensions)).
-
-## Настройка
-
-Специальных настроек не требуется. Чтобы использовать фирменные палитры XBSL,
-выберите тему `XBSL Dark` или `XBSL Light` в палитре тем Zed. Без них
-подсветка использует цвета текущей темы.
 
 ## Структура
 
@@ -68,10 +54,6 @@ zed-element-extension-main/
 │   ├── textobjects.scm
 │   └── overrides.scm
 ├── examples/               # примеры .xbsl
-└── tree-sitter-xbsl/       # исходники грамматики Tree-sitter
-    ├── grammar.js
-    ├── src/parser.c        # сгенерированный парсер
-    └── test/corpus/        # корпусные тесты грамматики
 ```
 
 ## Дальнейшее развитие
