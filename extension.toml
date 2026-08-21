@@ -13,5 +13,5 @@ languages = ["languages/xbsl"]
 # pin `rev` to its commit SHA, e.g.:
 #   repository = "https://github.com/<you>/tree-sitter-xbsl"
 #   rev = "<commit sha>"
-repository = "https://github.com/acpav/zed-element-extension/tree-sitter-xbsl"
-rev = "c38c0c4986de16ed793a513a493f92aeb1a01e74"
+repository = "https://github.com/acpav/tree-sitter-xbsl"
+rev = "4e39ced7ab9d5432a73b6e04412dc960490ee04a"
