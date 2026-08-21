@@ -8,10 +8,5 @@ repository = "https://github.com/acpav/zed-element-extension"
 languages = ["languages/xbsl"]
 
 [grammars.xbsl]
-# Local development: the grammar lives in ./tree-sitter-xbsl (a git repository).
-# When publishing, replace with the URL of your tree-sitter-xbsl repository and
-# pin `rev` to its commit SHA, e.g.:
-#   repository = "https://github.com/<you>/tree-sitter-xbsl"
-#   rev = "<commit sha>"
 repository = "https://github.com/acpav/tree-sitter-xbsl"
 rev = "4e39ced7ab9d5432a73b6e04412dc960490ee04a"
