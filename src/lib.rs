@@ -59,10 +59,11 @@ impl XbslExtension {
             .find(|asset| asset.name == asset_name)
             .ok_or_else(|| format!("release {SERVER_VERSION} has no asset `{asset_name}`"))?;
 
-        let archive_path = format!("{server_dir}/{asset_name}");
+        // `download_file` with `GzipTar` treats the path as the extraction
+        // directory: the archive contents are unpacked directly into it.
         let download_result = zed::download_file(
             &asset.download_url,
-            &archive_path,
+            &server_dir,
             zed::DownloadedFileType::GzipTar,
         );
         if let Err(error) = download_result {
