@@ -1,2 +1,5 @@
-
+# Zed-cached grammar builds for the dev extension
 grammars/
+
+# Rust build artifacts of the extension code
+target/

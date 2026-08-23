@@ -43,6 +43,12 @@
 (call_expression
   callee: (postfix_expression (member_expression property: (identifier) @function)))
 
+; Lambda expressions
+(lambda_expression (identifier) @variable.parameter)
+
+; `Тип<Выражение>` type-of operator (single regex token)
+(type_of_expression) @keyword
+
 ; Types
 (type_identifier) @type
 (builtin_type) @type.builtin
@@ -65,7 +71,7 @@
 
 ; Operators
 [
-  "=" "==" "!=" "<" ">" "<=" ">=" "+" "-" "*" "/" "%" "?" ":" "->" "|" "&" "<>"
+  "=" "==" "!=" "<" ">" "<=" ">=" "+" "-" "*" "/" "%" "?" ":" "->" "|" "&" "<>" "!" "?."
 ] @operator
 
 ; Punctuation

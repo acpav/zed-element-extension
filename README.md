@@ -17,7 +17,14 @@ Based on the Visual Studio Code extension [element-lang-vscode](https://github.c
   - typed literals (`Ресурс{...}`, `Время{00:00:00}`, …)
   - query blocks `Запрос{ ... }` with XBQL highlighting (keywords,
     aggregate functions, parameters `%Параметр`/`%{...}`)
+  - lambdas (`П -> Выражение`), null-forgiving `!`, optional chaining `?.`,
+    `Тип<...>` type-of operator
   - annotations `@Имя`, comments `//` and `/* */`
+- **LSP** via the [lsp-element-xbsl](https://github.com/acpav/lsp-element-xbsl)
+  language server:
+  - diagnostics: parse errors and missing tokens
+  - document outline: methods (with parameters), types, constants, variables
+  - completion: bilingual keywords (RU/EN) and identifiers declared in the file
 - **Outline**: methods, types, constants, variables
 - **Text objects**: `method` / `class` for Vim mode
 - **Indentation**: auto-indent for compound statements, auto-dedent for
@@ -36,11 +43,24 @@ Based on the Visual Studio Code extension [element-lang-vscode](https://github.c
    first time, Zed compiles the parser itself (requires `wasi-sdk`, which Zed
    downloads automatically).
 
+### Language server
+
+On the first `.xbsl` file the extension downloads `lsp-element-xbsl` from
+[GitHub Releases](https://github.com/acpav/lsp-element-xbsl/releases) (see
+`SERVER_VERSION` in `src/lib.rs` for the pinned tag) into the extension
+working directory. Alternatively, put the server binary on `$PATH` — the
+extension will use it as is.
+
+To build the server from source: `cargo install --git
+https://github.com/acpav/lsp-element-xbsl`.
+
 ## Structure
 
 ```
 zed-element-extension-main/
-├── extension.toml          # extension manifest
+├── extension.toml          # extension manifest (language, grammar, LSP)
+├── Cargo.toml              # Rust extension code (zed_extension_api)
+├── src/lib.rs              # downloads/launches the LSP server
 ├── languages/xbsl/         # language configuration and Tree-sitter queries
 │   ├── config.toml
 │   ├── highlights.scm
@@ -54,10 +74,8 @@ zed-element-extension-main/
 
 ## Roadmap
 
-- LSP server integration for XBSL (e.g.,
-  [keyfire/xbsl](https://github.com/keyfire/xbsl)) via `language_servers` in
-  the manifest and extension Rust code.
 - Semantic tokens, run/debug support.
+- LSP: hover, go-to-definition.
 
 ## License
 
@@ -88,7 +106,14 @@ MIT, see [LICENSE](./LICENSE).
   - типизированные литералы (`Ресурс{...}`, `Время{00:00:00}`, …)
   - блоки запросов `Запрос{ ... }` с подсветкой XBQL (ключевые слова,
     агрегатные функции, параметры `%Параметр`/`%{...}`)
+  - лямбды (`П -> Выражение`), null-forgiving `!`, опциональный доступ `?.`,
+    оператор `Тип<...>`
   - аннотации `@Имя`, комментарии `//` и `/* */`
+- **LSP** через языковой сервер
+  [lsp-element-xbsl](https://github.com/acpav/lsp-element-xbsl):
+  - диагностика: ошибки парсинга и пропущенные токены
+  - структура документа: методы (с параметрами), типы, константы, переменные
+  - автодополнение: ключевые слова (RU/EN) и имена, объявленные в файле
 - **Структура кода** (outline): методы, типы, константы, переменные
 - **Навигация** (text objects): `method` / `class` для Vim-режима
 - **Отступы**: авто-отступ для составных операторов, авто-выравнивание
@@ -107,11 +132,24 @@ MIT, see [LICENSE](./LICENSE).
    Zed сам скомпилирует парсер (потребуется `wasi-sdk`, Zed скачает его
    автоматически).
 
+### Языковой сервер
+
+При первом открытии `.xbsl` расширение скачивает `lsp-element-xbsl` из
+[GitHub Releases](https://github.com/acpav/lsp-element-xbsl/releases)
+(пиннингованная версия — константа `SERVER_VERSION` в `src/lib.rs`) в
+рабочий каталог расширения. Альтернативно можно положить бинарник сервера в
+`$PATH` — расширение использует его как есть.
+
+Сборка сервера из исходников: `cargo install --git
+https://github.com/acpav/lsp-element-xbsl`.
+
 ## Структура
 
 ```
 zed-element-extension-main/
-├── extension.toml          # манифест расширения
+├── extension.toml          # манифест расширения (язык, грамматика, LSP)
+├── Cargo.toml              # Rust-код расширения (zed_extension_api)
+├── src/lib.rs              # скачивание/запуск LSP-сервера
 ├── languages/xbsl/         # конфигурация языка и Tree-sitter запросы
 │   ├── config.toml
 │   ├── highlights.scm
@@ -125,10 +163,8 @@ zed-element-extension-main/
 
 ## Дальнейшее развитие
 
-- Подключение LSP-сервера для XBSL (например,
-  [keyfire/xbsl](https://github.com/keyfire/xbsl)) через `language_servers`
-  в манифесте и Rust-код расширения.
 - Семантические токены, запуск/отладка.
+- LSP: hover, переход к определению.
 
 ## Лицензия
 
