@@ -4,7 +4,7 @@ use zed_extension_api as zed;
 /// GitHub repository that publishes the server binaries.
 const SERVER_REPO: &str = "acpav/lsp-element-xbsl";
 /// Release tag to download. Bump together with a new server release.
-const SERVER_VERSION: &str = "v0.3.0";
+const SERVER_VERSION: &str = "v0.4.0";
 const SERVER_BINARY: &str = "lsp-element-xbsl";
 
 struct XbslExtension {
