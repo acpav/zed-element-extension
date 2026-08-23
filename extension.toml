@@ -3,14 +3,10 @@ name = "1C:Element (XBSL)"
 version = "0.2.0"
 schema_version = 1
 authors = ["1C:Element (XBSL) extension contributors"]
-description = "1C:Element (XBSL) language support: syntax highlighting, indentation, outline, diagnostics and completion via the lsp-element-xbsl language server"
+description = "1C:Element (XBSL) language support: syntax highlighting"
 repository = "https://github.com/acpav/zed-element-extension"
 languages = ["languages/xbsl"]
 
 [grammars.xbsl]
 repository = "https://github.com/acpav/tree-sitter-xbsl"
 rev = "fb99c504a551cb44312a92766d48a2e407ca8389"
-
-[language_servers.xbsl-lsp]
-# Must match the `name` in languages/xbsl/config.toml (case-sensitive).
-languages = ["Xbsl"]
