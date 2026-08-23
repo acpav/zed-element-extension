@@ -12,4 +12,5 @@ repository = "https://github.com/acpav/tree-sitter-xbsl"
 rev = "fb99c504a551cb44312a92766d48a2e407ca8389"
 
 [language_servers.xbsl-lsp]
-language = "xbsl"
+# Must match the `name` in languages/xbsl/config.toml (case-sensitive).
+languages = ["Xbsl"]

@@ -3,3 +3,6 @@ grammars/
 
 # Rust build artifacts of the extension code
 target/
+
+# Zed-built wasm artifact of the extension code
+extension.wasm
